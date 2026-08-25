@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    :root { color-scheme: light dark; }
+    body { font-family: sans-serif; padding: 16px; max-width: 480px;
+           background: #fff; color: #1a1a1a; }
+    label { display: block; margin-top: 12px; font-size: 13px; }
+    input { width: 100%; padding: 6px; margin-top: 4px; box-sizing: border-box;
+            background: #fff; color: #1a1a1a; border: 1px solid #999; border-radius: 4px; }
+    button { margin-top: 16px; padding: 8px 20px; }
+    #saved { color: #188038; font-size: 13px; margin-left: 8px; }
+    p { color: #555; }
+    @media (prefers-color-scheme: dark) {
+      body { background: #202124; color: #e8eaed; }
+      input { background: #303134; color: #e8eaed; border-color: #5f6368; }
+      p { color: #9aa0a6; }
+      #saved { color: #81c995; }
+    }
+  </style>
+</head>
+<body>
+  <h3>Gemini Live Dub — настройки</h3>
+  <label>API-ключ Google AI Studio
+    <input type="password" id="apiKey" placeholder="AIza…">
+  </label>
+  <label>Модель Live API
+    <input type="text" id="model">
+  </label>
+  <hr style="margin:16px 0">
+  <p style="font-size:12px;color:#666;margin:0 0 4px">
+    Необязательно: «три агента» для синхро-режима. Пустое поле — этот шаг делает Gemini.
+  </p>
+  <label>OpenAI API-ключ (перевод)
+    <input type="password" id="openaiKey" placeholder="sk-…">
+  </label>
+  <label>Модель OpenAI
+    <input type="text" id="openaiModel">
+  </label>
+  <label>ElevenLabs API-ключ (расшифровка)
+    <input type="password" id="elevenKey" placeholder="sk_…">
+  </label>
+  <p style="font-size:12px;color:#666;margin:4px 0 0">
+    Различает говорящих по голосу и ставит знаки препинания. Без него расшифровку
+    сделает OpenAI — хуже, но работает.
+  </p>
+  <label>Fish Audio API-ключ (озвучка)
+    <input type="password" id="fishKey">
+  </label>
+
+  <hr style="margin:16px 0">
+  <h4 style="margin:0 0 4px">Сервер</h4>
+  <p style="font-size:12px;color:#666;margin:0 0 4px">
+    Адрес проекта Supabase и публичный ключ. Пока не заполнено — расширение работает
+    полностью локально. Таблицы создаются файлом <code>server/supabase.sql</code>.
+  </p>
+  <label>URL проекта
+    <input type="text" id="serverUrl" placeholder="https://xxxxx.supabase.co">
+  </label>
+  <label>Публичный ключ
+    <input type="password" id="serverKey" placeholder="sb_publishable_…">
+  </label>
+  <div id="account" style="font-size:12px;color:#666;margin-top:8px"></div>
+  <div id="adminLink" style="margin-top:10px;display:none">
+    <a href="#" id="openAdmin" style="font-size:13px">Отчёт по просмотрам →</a>
+  </div>
+
+  <h4 style="margin:18px 0 4px">Пакет голосов</h4>
+  <p style="font-size:12px;color:#666;margin:0 0 8px">
+    Отметьте голоса, которыми озвучивать. Пол спикера определяется по записи:
+    мужчинам достаются отмеченные мужские голоса по порядку, женщинам — женские.
+    ▶ — послушать образец (нужен ключ Fish выше).
+  </p>
+  <div id="voicePack"></div>
+
+  <label style="margin-top:14px">Свои ID голосов через запятую (заменяют пакет целиком)
+    <input type="text" id="fishVoice" placeholder="пусто — работает пакет выше">
+  </label>
+  <button id="save">Сохранить</button>
+  <button id="testKeys" type="button">Проверить ключи</button>
+  <button id="testDub" type="button">Тест озвучки</button><span id="saved"></span>
+  <pre id="testResult" style="font-size:12px;white-space:pre-wrap;margin-top:8px"></pre>
+  <script src="options.js"></script>
+</body>
+</html>

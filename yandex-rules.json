@@ -1,0 +1,40 @@
+[
+  {
+    "id": 1,
+    "priority": 1,
+    "action": {
+      "type": "modifyHeaders",
+      "requestHeaders": [
+        { "header": "Origin", "operation": "remove" },
+        { "header": "Referer", "operation": "remove" },
+        {
+          "header": "User-Agent",
+          "operation": "set",
+          "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 YaBrowser/26.6.0.0 Safari/537.36"
+        },
+        {
+          "header": "sec-ch-ua",
+          "operation": "set",
+          "value": "\"Chromium\";v=\"148\", \"YaBrowser\";v=\"26.6.\", \"Not?A_Brand\";v=\"99\", \"Yowser\";v=\"2.5\""
+        },
+        {
+          "header": "sec-ch-ua-full-version-list",
+          "operation": "set",
+          "value": "\"Chromium\";v=\"148.0.7778.760\", \"YaBrowser\";v=\"26.6.4.760\", \"Not?A_Brand\";v=\"99.0.0.0\", \"Yowser\";v=\"2.5\""
+        },
+        { "header": "sec-ch-ua-mobile", "operation": "set", "value": "?0" },
+        { "header": "sec-ch-ua-platform", "operation": "set", "value": "\"Windows\"" },
+        { "header": "Sec-Fetch-Mode", "operation": "remove" },
+        { "header": "Sec-Fetch-Site", "operation": "remove" },
+        { "header": "Sec-Fetch-Dest", "operation": "remove" },
+        { "header": "Sec-Fetch-User", "operation": "remove" },
+        { "header": "Sec-Fetch-Storage-Access", "operation": "remove" },
+        { "header": "Cookie", "operation": "remove" }
+      ]
+    },
+    "condition": {
+      "urlFilter": "||api.browser.yandex.ru/",
+      "resourceTypes": ["xmlhttprequest"]
+    }
+  }
+]

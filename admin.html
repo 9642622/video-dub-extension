@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Просмотры — отчёт</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { font: 13px/1.45 -apple-system, sans-serif; margin: 0; padding: 20px;
+           background: #fff; color: #1a1a1a; }
+    h3 { margin: 0 0 4px; }
+    .sub { color: #666; font-size: 12px; margin-bottom: 16px; }
+    fieldset { border: 1px solid #ddd; border-radius: 8px; margin: 0 0 16px; padding: 12px 14px; }
+    legend { font-size: 12px; color: #666; padding: 0 6px; }
+    label { font-size: 12px; color: #666; margin-right: 12px; }
+    input, select { padding: 6px 8px; border: 1px solid #bbb; border-radius: 5px;
+                    background: #fff; color: #1a1a1a; font-size: 13px; }
+    button { padding: 7px 14px; border: none; border-radius: 6px; background: #1a73e8;
+             color: #fff; font-size: 13px; cursor: pointer; }
+    button.ghost { background: #eee; color: #333; }
+    table { border-collapse: collapse; width: 100%; font-size: 12.5px; }
+    th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid #eee; white-space: nowrap; }
+    th { color: #666; font-weight: normal; position: sticky; top: 0; background: #fff; cursor: pointer; }
+    td.file { white-space: normal; max-width: 420px; }
+    .num { text-align: right; font-variant-numeric: tabular-nums; }
+    .totals { margin: 10px 0; font-size: 12.5px; color: #333; }
+    .msg { font-size: 12.5px; color: #b26a00; margin-top: 8px; }
+    .wrap { max-height: 62vh; overflow: auto; border: 1px solid #eee; border-radius: 8px; }
+    @media (prefers-color-scheme: dark) {
+      body { background: #202124; color: #e8eaed; }
+      fieldset, .wrap { border-color: #3c4043; }
+      th { background: #202124; color: #9aa0a6; }
+      td, th { border-color: #2b2d31; }
+      input, select { background: #303134; color: #e8eaed; border-color: #5f6368; }
+      button.ghost { background: #3c4043; color: #e8eaed; }
+      .sub, label { color: #9aa0a6; }
+      .totals { color: #e8eaed; }
+    }
+  </style>
+</head>
+<body>
+  <h3>Просмотры записей</h3>
+  <div class="sub" id="who"></div>
+
+  <fieldset id="signinBox">
+    <legend>Вход администратора</legend>
+    <input type="email" id="email" placeholder="почта" autocomplete="username" style="width:220px">
+    <input type="password" id="password" placeholder="пароль" autocomplete="current-password" style="width:180px">
+    <button id="signin">Войти</button>
+    <button id="signout" class="ghost" style="display:none">Выйти</button>
+    <div class="msg" id="authMsg"></div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Отбор</legend>
+    <label>с <input type="date" id="from"></label>
+    <label>по <input type="date" id="to"></label>
+    <label>человек <input type="text" id="fWho" placeholder="почта или имя" style="width:170px"></label>
+    <label>запись <input type="text" id="fFile" placeholder="часть имени файла" style="width:190px"></label>
+    <button id="apply">Показать</button>
+    <button id="csv" class="ghost">Скачать CSV</button>
+  </fieldset>
+
+  <div class="totals" id="totals"></div>
+  <div class="wrap"><table id="tbl">
+    <thead><tr>
+      <th data-k="created_at">Когда</th>
+      <th data-k="who">Кто</th>
+      <th data-k="file">Запись</th>
+      <th data-k="watched" class="num">Смотрел</th>
+      <th data-k="share" class="num">Доля</th>
+      <th data-k="max_pos" class="num">Дошёл до</th>
+      <th data-k="dubbed">Перевод</th>
+    </tr></thead>
+    <tbody></tbody>
+  </table></div>
+  <div class="msg" id="msg"></div>
+
+  <script src="admin.js"></script>
+</body>
+</html>
